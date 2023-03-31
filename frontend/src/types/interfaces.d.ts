@@ -1,3 +1,6 @@
+type SignalPick<T, K extends keyof T> = {
+    [key in K]: T[key];
+}
 
 interface ILocalMessageData {
     content: string;

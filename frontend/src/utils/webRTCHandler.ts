@@ -101,7 +101,6 @@ export const prepareNewPeerConnection = (connUserSocketId: string, isInitiator: 
     });
 
     peers[connUserSocketId].on("data", (data: string) => {
-        console.log(data)
         const messageData = JSON.parse(data);
         appendNewMessage(messageData);
     });
@@ -112,7 +111,7 @@ export const handleSignalingData = (data: ISignalData) => {
     peers[data.connUserSocketId].signal(data.signal);
 };
 
-export const removePeerConnection = (data: ISignalData) => {
+export const removePeerConnection = (data: SignalPick<ISignalData, "socketId">) => {
     const { socketId } = data;
     const videoContainer = socketId ? document.getElementById(socketId) : null;
     const videoEl = (document.getElementById(`${socketId}-video`) as HTMLVideoElement | null)
